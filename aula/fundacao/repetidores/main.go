@@ -25,7 +25,7 @@ func main() {
 	temp := 0
 	x := 0
 
-	println("\nLoop while")
+	println("\nLoop infinito")
 	for {
 		x++
 
@@ -45,7 +45,7 @@ func main() {
 		}
 	}
 
-	println("\nLoop while with continue")
+	println("\nLoop while with infinito")
 	for {
 		x++
 
@@ -62,6 +62,13 @@ func main() {
 			fmt.Printf("Loop interrompido, total de %d iterações\n\n", x)
 			break
 		}
+	}
+
+	println("\nLoop while with condition")
+	temp = 0
+	for temp < 10 {
+		temp++
+		fmt.Printf("%v\n", temp)
 	}
 
 	//slice
