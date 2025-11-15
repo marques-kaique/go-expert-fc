@@ -8,7 +8,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {{range .}}
       <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 hover:scale-105 transform transition duration-300">
-        <h2 class="text-xl font-semibold text-gray-900 dark:text-white">{{ .Nome | ToUpper }}</h2>
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white">{{ .Nome | ToUpper }}</h2> <!-- ToUpper é uma função que transforma o texto em maiúsculo declarado em main.go -->
         {{ if lt .Preco 29.90 }}
             <p class="mt-2 text-lg text-red-600 dark:text-red-400">R$ {{printf "%.2f" .Preco}}</p>
         {{else}}

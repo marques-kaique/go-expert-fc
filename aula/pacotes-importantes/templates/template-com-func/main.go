@@ -13,7 +13,7 @@ type Curso struct {
 
 type Cursos []Curso
 
-func Uppercase(s string) string {
+func UpperCase(s string) string {
 	return strings.ToUpper(s)
 }
 
@@ -37,13 +37,16 @@ func CursoTemplateHandler(w http.ResponseWriter, r *http.Request) {
 		Preco: 49.90,
 	}
 
+	tmp := template.New("content.html")
+
 	// utilizando funcs, é necessário criar um novo template e adicionar as funções a ele
 	// após isso, é necessário fazer o parse dos arquivos de template
 	// não é possível utilizar o template.Must() com o template.New()
-	tmp := template.New("content.html")
 	tmp.Funcs(template.FuncMap{
-		"ToUpper": Uppercase,
+		"ToUpper": UpperCase,
 	})
+	// tmp.Funcs(template.FuncMap{"ToUpper": strings.ToUpper}) // utilizando a função nativa
+
 	tmp = template.Must(tmp.ParseFiles(templates...))
 
 	err := tmp.Execute(w, Cursos{
