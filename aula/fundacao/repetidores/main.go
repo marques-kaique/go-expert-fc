@@ -10,7 +10,7 @@ func main() {
 	array[1] = 2
 	array[2] = 3
 	array[3] = 4
-	array[4] = 5	
+	array[4] = 5
 
 	println("\nLoop for incremental com array")
 	for i := 0; i < len(array); i++ {
@@ -25,16 +25,16 @@ func main() {
 	temp := 0
 	x := 0
 
-	println("\nLoop while")
+	println("\nLoop infinito")
 	for {
 		x++
 
 		if temp == 0 || temp%2 == 0 {
-			fmt.Printf("%d é igual a par\n", temp) 
+			fmt.Printf("%d é igual a par\n", temp)
 			temp++
 		}
 
-		fmt.Printf("%d é igual a impar\n", temp) 
+		fmt.Printf("%d é igual a impar\n", temp)
 		temp++
 
 		if temp == 10 {
@@ -45,23 +45,30 @@ func main() {
 		}
 	}
 
-	println("\nLoop while with continue")
+	println("\nLoop while with infinito")
 	for {
 		x++
 
 		if temp == 0 || temp%2 == 0 {
-			fmt.Printf("%d é igual a par\n", temp) 
+			fmt.Printf("%d é igual a par\n", temp)
 			temp++
 			continue
 		}
 
-		fmt.Printf("%d é igual a impar\n", temp) 
+		fmt.Printf("%d é igual a impar\n", temp)
 		temp++
 
 		if temp == 10 {
 			fmt.Printf("Loop interrompido, total de %d iterações\n\n", x)
 			break
 		}
+	}
+
+	println("\nLoop while with condition")
+	temp = 0
+	for temp < 10 {
+		temp++
+		fmt.Printf("%v\n", temp)
 	}
 
 	//slice
