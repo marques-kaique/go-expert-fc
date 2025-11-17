@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  mysql:
+    platform: linux/amd64
+    image: mysql:8.0.28
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=goexpert
+
+
+
+## docker-compose up -d -> para subir o container
+## docker-compose down -> para desligar o container
+## docker ps -> verificar se o container está rodando
+## mysql -h 127.0.0.1 -P 3306 -u root -p -> para entrar no container mysql
+## docker logs banco-dados-mysql-1 -> para ver os logs do container
+
+
+## CREATE DATABASE goexpert;
+## USE goexpert;
+## CREATE TABLE products (id VARCHAR(255), name VARCHAR(80), price DECIMAL(10,2), created_at DATETIME, PRIMARY KEY (id));
