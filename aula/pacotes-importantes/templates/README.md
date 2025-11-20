@@ -95,4 +95,5 @@ renderiza como --> &lt;script&gt;alert("XSS")&lt;/script&gt;
 
 - [Documentação oficial text/template](https://pkg.go.dev/text/template)
 - [Documentação oficial html/template](https://pkg.go.dev/html/template)
+- [Documentação oficial pkg-functions](https://pkg.go.dev/html/template#pkg-functions)
 - [Guia de Templates Go (Go.dev)](https://go.dev/doc/articles/wiki/)

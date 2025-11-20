@@ -10,7 +10,7 @@ func main() {
 	array[1] = 2
 	array[2] = 3
 	array[3] = 4
-	array[4] = 5
+	array[4] = 5	
 
 	println("\nLoop for incremental com array")
 	for i := 0; i < len(array); i++ {
@@ -30,11 +30,11 @@ func main() {
 		x++
 
 		if temp == 0 || temp%2 == 0 {
-			fmt.Printf("%d é igual a par\n", temp)
+			fmt.Printf("%d é igual a par\n", temp) 
 			temp++
 		}
 
-		fmt.Printf("%d é igual a impar\n", temp)
+		fmt.Printf("%d é igual a impar\n", temp) 
 		temp++
 
 		if temp == 10 {
@@ -50,12 +50,12 @@ func main() {
 		x++
 
 		if temp == 0 || temp%2 == 0 {
-			fmt.Printf("%d é igual a par\n", temp)
+			fmt.Printf("%d é igual a par\n", temp) 
 			temp++
 			continue
 		}
 
-		fmt.Printf("%d é igual a impar\n", temp)
+		fmt.Printf("%d é igual a impar\n", temp) 
 		temp++
 
 		if temp == 10 {
