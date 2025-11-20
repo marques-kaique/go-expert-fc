@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/ksmarques/go-expert-fc-main/aula/packaging/math"
+	"github.com/marques-kaique/go-expert-fc/aula/packaging/math"
 )
 
 func main() {
