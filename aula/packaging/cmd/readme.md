@@ -1,0 +1,1 @@
+Geralmente, o cmd fica os arquivos que serão executados pelo main
