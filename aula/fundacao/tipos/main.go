@@ -5,31 +5,23 @@ import (
 	"unsafe"
 )
 
-<<<<<<<< HEAD:aula/fundacao/tipos/main.go
-========
 type ID int
 
 type User struct {
-	ID   int
-	Name string
+	ID     int
+	Name   string
 	Active bool
 }
 
->>>>>>>> origin/main:aula/tipos/main.go
 var (
 	a string
 	b bool
 	c int
 	d float64
-<<<<<<<< HEAD:aula/fundacao/tipos/main.go
 	g [2]int // array valor fixo
 	h []int  // slice valor variável
-========
 	e ID
 	f User
-	g [2]int        // array valor fixo
-	h []int 		// slice valor variável
->>>>>>>> origin/main:aula/tipos/main.go
 	i map[string]int
 )
 
@@ -43,8 +35,6 @@ func main() {
 	fmt.Printf("%T  tamanho: %v\n", d, unsafe.Sizeof(d))
 	fmt.Printf("%T  tamanho: %d\n\n", d, unsafe.Sizeof(d))
 
-<<<<<<<< HEAD:aula/fundacao/tipos/main.go
-========
 	println("\n\n*** ID - Novo tipo")
 	println("ID: ", e, "tamanho: ", unsafe.Sizeof(e))
 
@@ -54,8 +44,8 @@ func main() {
 
 	//inicializando um struct
 	user := User{
-		ID:   1,
-		Name: "John",
+		ID:     1,
+		Name:   "John",
 		Active: true,
 	}
 
@@ -65,8 +55,7 @@ func main() {
 	user.Active = false
 	print("*** Struct alterada\n")
 	fmt.Printf("%T: %v tamanho: %v\n", user, user, unsafe.Sizeof(user))
-	
->>>>>>>> origin/main:aula/tipos/main.go
+
 	println("\n\n*** Array")
 	fmt.Printf("%T: %v tamanho: %v\n\n", g, g, unsafe.Sizeof(g))
 
