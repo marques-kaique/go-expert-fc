@@ -44,7 +44,7 @@ func workWithSlice() {
 	fmt.Printf("capacidade: %d, %v tamanho: %v\n\n", cap(slice[:2]), slice[:2], len(slice[:2]))
 
 	slice = append(slice, 5)
-
+	
 	println("*** Agregando apenas um novo valor ***")
 
 	fmt.Printf("capacidade: %d, %v tamanho: %v\n\n", cap(slice), slice, len(slice))
@@ -69,7 +69,7 @@ func workWithSlice() {
 
 	println("*** Agregando valores ao slice temporário ***")
 	fmt.Printf("capacidade: %d, %v tamanho: %v\n\n", cap(sliceTemp), sliceTemp, len(sliceTemp))
-
+	
 	println("O make alocou elementos em memoria para o sliceTemp")
 	println("Ao agregar novos valores ao sliceTemp, os valores anteriores não são perdidos")
 

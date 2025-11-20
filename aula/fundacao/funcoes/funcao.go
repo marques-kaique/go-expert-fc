@@ -23,7 +23,7 @@ func divisaoComZero(a, b int) (int, error) { // padrão de retorno de erro ser o
 
 func somandoNValores(valores ...int) int {
 	result := 0
-
+	
 	for _, v := range valores {
 		result += v
 	}
@@ -32,7 +32,7 @@ func somandoNValores(valores ...int) int {
 }
 
 func concatenandoComNValores(nome string, valores ...int) string {
-
+	
 	for _, v := range valores {
 		// fmt.Sprint converte o valor para string
 		// existe o strconv.Itoa que faz a mesma coisa
@@ -46,7 +46,7 @@ func concatenandoComNValores(nome string, valores ...int) string {
 func funcao() {
 	println("*** Soma")
 	println(soma(1, 2))
-
+	
 	println("\n*** Divisão com resto")
 	println(divisao(10, 3))
 
