@@ -101,7 +101,7 @@ func getCoin(ctx context.Context) (Coin, error) {
 }
 
 func insertCoin(ctx context.Context, u USDBRL) error {
-	ctx, cancel := context.WithTimeout(ctx, 10*time.Millisecond)
+	ctx, cancel := context.WithTimeout(ctx, 100*time.Millisecond)
 	defer cancel()
 
 	query := `
