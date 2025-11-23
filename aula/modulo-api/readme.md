@@ -20,3 +20,23 @@ DB_NAME=goexpert
 WEB_SERVER_PORT=8000
 JWT_SECRET=your-secret-key-here
 JWT_EXPIRESIN=300 ## tempo está em segundos, 5 minutos
+
+
+Token JWT 
+
+o token jwt é composto por 3 partes
+antes do primeito ponto
+- algoritmo utilizado para criptografia
+
+após o primeiro ponto, dados que estão sendo transmitido, podendo ser:
+  - sub -> costuma carregar o user_id nesse campo
+  - name 
+  - etc
+
+Após o segundo ponto, temos a assinatura, o qual validade autenticidade do token, garante que ele não foi forçado, então aqui tem uma chave secreta que o sistema consegue validar se o token foi gerado pelo proprio sistema (pode ser utilizada chave RCA)
+
+Quando token estiver valido mas expirado, pode ter um refresh token para gerar um novo token
+
+
+go get -> para baixar dependencia que ficam localizado no go mod
+go install -> baixar o arquivo binario para pode ser utilizado, todo os arquivo ficam na pasta /bin do GOPATH

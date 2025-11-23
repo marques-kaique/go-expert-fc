@@ -52,6 +52,7 @@ func LoadConfig(path string) (*conf, error) {
 	// HS256 é o algoritmo de criptografia
 	// []byte(cfg.JWTSecret) é a chave de criptografia
 	// nil é o validador de token
+	// sercret é a chave de criptografia, que provem do .env
 	cfg.TokenAuth = jwtauth.New("HS256", []byte(cfg.JWTSecret), nil)
 
 	return cfg, nil

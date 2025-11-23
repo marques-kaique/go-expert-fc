@@ -25,6 +25,18 @@ func NewProductHandler(db database.ProductInterface) *ProductHanlder {
 	}
 }
 
+// Create Product godoc
+// @Summary Create a new product
+// @Description Create a new product
+// @Tags products
+// @Accept  json
+// @Produce  json
+// @Param product body dto.CreateProductRequest true "product data"
+// @Success 201
+// @Failure 400
+// @Failure 500 {object} Error
+// @Router /products [post]
+// @Security ApiKeyAuth
 func (h *ProductHanlder) CreateProduct(w http.ResponseWriter, r *http.Request) {
 	// quando recebe dados de requisição, são dados puros
 	// para manipular, precisa de um DTO
@@ -47,12 +59,26 @@ func (h *ProductHanlder) CreateProduct(w http.ResponseWriter, r *http.Request) {
 	err = h.ProductDB.Create(p)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
+		err := Error{Message: err.Error()}
+		json.NewEncoder(w).Encode(err)
 		return
 	}
 
 	w.WriteHeader(http.StatusCreated)
 }
 
+// GetProduct godoc
+// @Summary Get product
+// @Description get one product
+// @Tags products
+// @Accept json
+// @Produce json
+// @Param id path string true "product id" format(uuid)
+// @Success 200 {array} entity.Product
+// @Failure 404 {object} Error
+// @Failure 500 {object} Error
+// @Router /products/{id} [get]
+// @Security ApiKeyAuth
 func (h *ProductHanlder) GetProduct(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	fmt.Println("O id é: ", id)
@@ -73,6 +99,20 @@ func (h *ProductHanlder) GetProduct(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(product)
 }
 
+// ListProducts godoc
+// @Summary List products
+// @Description get all products
+// @Tags products
+// @Accept json
+// @Produce json
+// @Param page query string false "page number"
+// @Param limit query string false "limit"
+// @Param sort query string false "sort"
+// @Success 200 {array} entity.Product
+// @Failure 404 {object} Error
+// @Failure 500 {object} Error
+// @Router /products [get]
+// @Security ApiKeyAuth
 func (h *ProductHanlder) GetProducts(w http.ResponseWriter, r *http.Request) {
 	page := r.URL.Query().Get("page")
 	limit := r.URL.Query().Get("limit")
@@ -99,6 +139,19 @@ func (h *ProductHanlder) GetProducts(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(products)
 }
 
+// UpdateProduct godoc
+// @Summary Update product
+// @Description Update a product
+// @Tags products
+// @Accept json
+// @Produce json
+// @Param id path string true "product id" format(uuid)
+// @Param product body dto.CreateProductRequest true "product data"
+// @Success 200 
+// @Failure 404 {object} Error
+// @Failure 500 {object} Error
+// @Router /products/{id} [put]
+// @Security ApiKeyAuth
 func (h *ProductHanlder) UpdateProduct(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	if id == "" {
@@ -133,6 +186,18 @@ func (h *ProductHanlder) UpdateProduct(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
+// DeleteProduct godoc
+// @Summary Delete product
+// @Description Delete a product
+// @Tags products
+// @Accept json
+// @Produce json
+// @Param id path string true "product id" format(uuid)
+// @Success 200 
+// @Failure 404 {object} Error
+// @Failure 500 {object} Error
+// @Router /products/{id} [delete]
+// @Security ApiKeyAuth
 func (h *ProductHanlder) DeleteProduct(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	if id == "" {
