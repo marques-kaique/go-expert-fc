@@ -5,3 +5,25 @@ Content-Type: application/json
     "name": "products 1",
     "price": 100
 }
+
+###
+GET http://localhost:8000/products/1feb9713-4ff4-4136-b10d-048056a5e4e6 HTTP/1.1
+Accept: application/json
+
+###
+GET http://localhost:8000/products/?limit=2&page=1 HTTP/1.1
+Accept: application/json
+
+###
+PUT http://localhost:8000/products/1feb9713-4ff4-4136-b10d-048056a5e4e6 HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "products 10asd",
+    "price": 12231234564
+}
+
+###
+DELETE http://localhost:8000/products/1feb9713-4ff4-4136-b10d-048056a5e4e6 HTTP/1.1
+Accept: application/json
