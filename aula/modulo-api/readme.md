@@ -1,42 +1,123 @@
-A estrutura de respositorio vai seguir o layout de https://github.com/golang-standards/project-layout
+# Projeto Go
 
-/api -> Responsavel por documentação, especificação da API
-/internal -> responsavel por rodar a aplicação, não é uma pasta disponivel pois a regra de negocio se encontra nela
-/pkg -> são libarias que voce permite que seja publica, por exemplo, uma lib auth, pode ser reaproveitada em outros projeto pelo go mod
-/cmd -> aonde fica o projeto, no qual é gerado o executavo main.go - o local que será feito build, o correr seria ser composto por camada, cmd/server/main.go mas muitos deixam apenas em cmd
-/configs -> local que fica as configurações do projeto, como variaveis de ambientes, configurações para subir o projeto
-/test -> quando se possui arquivo adicionais para os testes, como arquivos e2e, documentação de teste, script (não necessariamente serão arquivos .go)
+Este projeto segue o padrão recomendado pelo
+**golang-standards/project-layout**, garantindo organização,
+escalabilidade e facilidade de manutenção.
 
-Para acessar o banco de dados
--> sqlite3 cmd/server/test.db
+------------------------------------------------------------------------
 
-Env
-DB_DRIVER=mysql
-DB_HOST=localhost
-DB_PORT=3306
-DB_USER=root
-DB_PASSWORD=root
-DB_NAME=goexpert
-WEB_SERVER_PORT=8000
-JWT_SECRET=your-secret-key-here
-JWT_EXPIRESIN=300 ## tempo está em segundos, 5 minutos
+## 📁 Estrutura de Pastas
 
+### **/api**
 
-Token JWT 
+Responsável por documentação e especificações da API.\
+Aqui podem estar arquivos OpenAPI/Swagger, exemplos de request/response
+e guias de uso.
 
-o token jwt é composto por 3 partes
-antes do primeito ponto
-- algoritmo utilizado para criptografia
+### **/internal**
 
-após o primeiro ponto, dados que estão sendo transmitido, podendo ser:
-  - sub -> costuma carregar o user_id nesse campo
-  - name 
-  - etc
+Contém toda **regra de negócio** e código que **não deve ser importado
+por outros projetos**.\
+Tudo que roda a aplicação vive aqui: services, repositories, handlers,
+use-cases etc.
 
-Após o segundo ponto, temos a assinatura, o qual validade autenticidade do token, garante que ele não foi forçado, então aqui tem uma chave secreta que o sistema consegue validar se o token foi gerado pelo proprio sistema (pode ser utilizada chave RCA)
+### **/pkg**
 
-Quando token estiver valido mas expirado, pode ter um refresh token para gerar um novo token
+Bibliotecas públicas que podem ser reutilizadas em outros projetos via
+`go mod`.\
+Exemplos: - `pkg/auth` -- módulo de autenticação reutilizável -
+`pkg/logger` -- abstração de logs - `pkg/validator` -- validações comuns
 
+### **/cmd**
 
-go get -> para baixar dependencia que ficam localizado no go mod
-go install -> baixar o arquivo binario para pode ser utilizado, todo os arquivo ficam na pasta /bin do GOPATH
+Onde ficam os **executáveis da aplicação**.\
+O mais comum é ter:
+
+    /cmd/server/main.go
+
+Aqui é feito o bootstrap da aplicação.\
+Alguns projetos simplificam e deixam apenas `/cmd/main.go`.
+
+### **/configs**
+
+Armazena arquivos de configuração do projeto:\
+- `.env`\
+- `config.yaml`\
+- templates e exemplos de configuração
+
+### **/test**
+
+Contém arquivos adicionais para testes:\
+- testes E2E\
+- documentação de cenários\
+- scripts auxiliares\
+Nem tudo aqui é necessariamente `.go`.
+
+------------------------------------------------------------------------
+
+## 🗃️ Acesso ao Banco de Dados
+
+### **SQLite**
+
+    sqlite3 cmd/server/test.db
+
+### **Ambiente (ENV)**
+
+    DB_DRIVER=mysql
+    DB_HOST=localhost
+    DB_PORT=3306
+    DB_USER=root
+    DB_PASSWORD=root
+    DB_NAME=goexpert
+    WEB_SERVER_PORT=8000
+    JWT_SECRET=your-secret-key-here
+    JWT_EXPIRESIN=300   # 300s = 5 minutos
+
+------------------------------------------------------------------------
+
+## 🔐 Token JWT --- Estrutura e Funcionamento
+
+O JWT é dividido em **3 partes**, separadas por ponto:
+
+### 1️⃣ **Header**
+
+Antes do primeiro ponto.\
+Define: - algoritmo de assinatura (ex: HS256, RS256) - tipo do token
+(`JWT`)
+
+### 2️⃣ **Payload**
+
+Dados transmitidos após o primeiro ponto.\
+Contém *claims*, como: - `sub` → normalmente armazena o `user_id` -
+`name` - `exp` - `iat` - claims customizados
+
+### 3️⃣ **Signature**
+
+Após o segundo ponto.\
+Responsável por validar: - autenticidade do token - integridade (garante
+que não foi alterado)
+
+Tokens podem ser assinados com chave secreta (HMAC) ou chave
+pública/privada (RSA).
+
+### 🔄 Token Expirado
+
+Se o token estiver **válido mas expirado**, utiliza-se um **refresh
+token** para gerar um novo access token.
+
+------------------------------------------------------------------------
+
+## 📦 Gerenciamento de Dependências
+
+### **`go get`**
+
+Baixa dependências e atualiza o `go.mod`.
+
+### **`go install`**
+
+Baixa e instala binários para uso local.\
+Os binários vão para:
+
+    $GOPATH/bin
+
+-----------------------------------------------------------------------
