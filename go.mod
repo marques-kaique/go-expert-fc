@@ -3,6 +3,7 @@ module github.com/marques-kaique/go-expert-fc
 go 1.24.4
 
 require (
+	github.com/devfullcycle/fcutils v0.2.3
 	github.com/rabbitmq/amqp091-go v1.10.0
 	github.com/stretchr/testify v1.11.1
 )

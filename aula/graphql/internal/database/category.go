@@ -1,0 +1,74 @@
+package database
+
+import (
+	"database/sql"
+
+	"github.com/google/uuid"
+)
+
+type Category struct {
+	// Database connection
+	// utilizando todas as interfaces para trabalha com banco de dados
+	db          *sql.DB
+	ID          string
+	Name        string
+	Description string
+}
+
+// constructor para o banco de dados
+// sigleton?
+func NewCategory(db *sql.DB) *Category {
+	return &Category{db: db}
+}
+
+func (c *Category) CreateCategory(name, description string) (Category, error) {
+	id := uuid.New().String()
+
+	query := "INSERT INTO categories (id, name, description) VALUES (?, ?, ?)"
+
+	_, err := c.db.Exec(query, id, name, description)
+	if err != nil {
+		return Category{}, err
+	}
+
+	return Category{
+		ID:          id,
+		Name:        name,
+		Description: description,
+	}, nil
+}
+
+func (c *Category) FindAll() ([]Category, error) {
+	query := "SELECT id, name, description FROM categories"
+
+	rows, err := c.db.Query(query)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var categories []Category
+
+	for rows.Next() {
+		var category Category
+		if err := rows.Scan(&category.ID, &category.Name, &category.Description); err != nil {
+			return nil, err
+		}
+		categories = append(categories, category)
+	}
+
+	return categories, nil
+}
+
+func (c *Category) FindByCourseID(courseID string) (Category, error) {
+	query := "SELECT c.id, c.name, c.description FROM categories c JOIN courses co ON c.id = co.category_id WHERE co.id = ?"
+
+	var category Category
+
+	err := c.db.QueryRow(query, courseID).Scan(&category.ID, &category.Name, &category.Description)
+	if err != nil {
+		return Category{}, err
+	}
+
+	return category, nil
+}
